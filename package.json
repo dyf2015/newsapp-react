@@ -1,0 +1,26 @@
+{
+  "name": "newsapp-react",
+  "version": "1.0.1",
+  "description": "网易新闻客户端接口",
+  "main": "index.js",
+  "scripts": {
+    "compile": "babel -d lib/ src/ --optional es7.classProperties",
+    "prepublish": "npm run compile"
+  },
+  "dependencies": {
+    "core-js": "^1.2.3"
+  },
+  "peerDependencies": {
+    "ntes-pubsub": "1.0.0",
+    "react": "^0.14.0"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dyb/newsapp-react.git"
+  },
+  "author": "ybduan <duanyubin2012@gmail.com>",
+  "license": "ISC"
+}
