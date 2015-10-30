@@ -1,4 +1,5 @@
 import React from 'react';
+import Pubsub from 'ntes-pubsub';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ export default class Login extends React.Component {
     window.__newsapp_login_done = (userInfo)=>{
       if(!!userInfo){
         this.userInfo = userInfo
-        this.props.getUserInfo(userInfo)
+        this.callback(this.userInfo)
+        this.callback = ()=>{}
       }
     }
     window.__newsapp_login_canceled = ()=>{
@@ -25,7 +27,8 @@ export default class Login extends React.Component {
     window.__newsapp_userinfo_done = (userInfo)=>{
       if(!!userInfo){
         this.userInfo = userInfo
-        this.props.getUserInfo(userInfo)
+        this.callback(this.userInfo)
+        this.callback = ()=>{}
       }
     }
   }
