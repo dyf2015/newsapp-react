@@ -1,7 +1,7 @@
 import React from 'react';
 import Pubsub from 'ntes-pubsub';
 
-export class Upload extends React.Component {
+export default class Upload extends React.Component {
   constructor(props) {
     super(props)
     this.token = null

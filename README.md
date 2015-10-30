@@ -107,6 +107,11 @@ import Pubsub from 'ntes-pubsub'
         
       })
     }
+    render(){
+      return (
+        <Upload />
+      )
+    }
   ```
 
 ### Changelog

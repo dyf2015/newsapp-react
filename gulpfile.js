@@ -8,11 +8,14 @@ gulp.task("webpack", function(callback) {
     // run webpack
     webpack(WebpackConfig, function(err, stats) {
         if(err) throw new gutil.PluginError("webpack", err);
+        gutil.log("[webpack]", stats.toString({
+            // output options
+        }));
         callback();
     });
 });
 gulp.task("html", ["clean"], function(callback){
-  return gulp.src('examples/**/index.html')
+  return gulp.src('examples/**/*.html')
     .pipe(gulp.dest('__build__/'))
 })
 gulp.task("clean", function(callback){
