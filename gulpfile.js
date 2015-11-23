@@ -12,7 +12,7 @@ gulp.task("webpack", function(callback) {
     });
 });
 gulp.task("html", ["clean"], function(callback){
-  return gulp.src('examples/**/index.html')
+  return gulp.src('examples/**/*.html')
     .pipe(gulp.dest('__build__/'))
 })
 gulp.task("clean", function(callback){
