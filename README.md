@@ -79,7 +79,7 @@ import Pubsub from 'ntes-pubsub'
 
   ```
   ...
-      componentDidMount(){
+      handleClick(){
         Pubsub.publish('newsapp:share', shareData)
       }
   ...
@@ -111,6 +111,7 @@ import Pubsub from 'ntes-pubsub'
 
 ### Changelog
 * 2015/10/26 项目建立
+* 2015/11/24 增加登录、分享、上传照片的DEMO
 
 
 

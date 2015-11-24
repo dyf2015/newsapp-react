@@ -44,9 +44,10 @@ export default class Location extends React.Component {
   changeLocation(callback){
     if((/NewsApp/ig).test(navigator.userAgent)){
       this.refs.iframe.src = "location://switch"
-      window.__newsapp_location_done = (info)=>
+      window.__newsapp_location_done = (info)=>{
         window.__newsapp_location_done = null
         callback(info || '未知')
+      }
     }else{
       callback('未知')
     }
