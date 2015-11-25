@@ -1,36 +1,37 @@
-### 网易新闻客户端接口-react版
+# 网易新闻客户端接口-react版
 
 > npm install --save newsapp-react ntes-pubsub
 
-#### Usage
+## Usage
 
 大部分接口推荐以单例模式使用。  
 接口订阅了以`newsapp:`开头的事件，如登录订阅了`newsapp:login`。  
 example:
 
-```
-// YourComponent.js
-import Pubsub from 'ntes-pubsub'
-...
-    componentDidMount(){
-      Pubsub.publish('newsapp:login', userInfo=>{
-        this.setState({userInfo: userInfo})
-      })
-    }
-...
-```
+  ```
+  // YourComponent.js
+  import Pubsub from 'ntes-pubsub'
+  ...
+  componentDidMount(){
+    Pubsub.publish('newsapp:login', userInfo=>{
+      this.setState({userInfo: userInfo})
+    })
+  }
+  ...
+  ```
 
-#### Interfaces
+## Interfaces
 
-- [登录](#Login)
-- [地理位置](#Location)
-- [分享](#Share)
-- [客户端UI调整](#UI)
-- [上传图片](#Upload)
+- [登录](#login)
+- [地理位置](#location)
+- [分享](#share)
+- [客户端UI调整](#ui)
+- [上传图片](#upload)
+- [加密](#encrypt)
 
 
 
-* Login
+### <a name="login"></a>Login
   > 登录： `Login`
 
   ```
@@ -43,7 +44,7 @@ import Pubsub from 'ntes-pubsub'
   ...
   ```
 
-* Location
+### <a name="location"></a>Location
   > 地理位置： `Location`
 
   * 更换地理位置： `newsapp:location:change`
@@ -59,7 +60,7 @@ import Pubsub from 'ntes-pubsub'
   ...
   ```
 
-* Share
+### <a name="share"></a>Share
   > 分享： `Share`
 
   设置默认分享文案：
@@ -79,13 +80,13 @@ import Pubsub from 'ntes-pubsub'
 
   ```
   ...
-      componentDidMount(){
+      handleClick(){
         Pubsub.publish('newsapp:share', shareData)
       }
   ...
   ```
 
-* UI
+### <a name="ui"></a>UI
   > 客户端UI调整： `UI`
 
   * 更改标题 `newsapp:title`
@@ -95,14 +96,14 @@ import Pubsub from 'ntes-pubsub'
     }
     ```
     
-*  Upload
+### <a name="upload"></a>Upload
   > 上传图片： `Upload`
 
-  props: width(宽度) height(高度) returnUrl（必需，图片上传返回地址）  
+  `props: width(宽度) height(高度) returnUrl（必需，图片上传返回地址）`  
   暂时安卓只有打开图集。  
-  在上传图片之前，接口会发布`loading:start`事件。  
+  在上传图片之前，接口会发布`loading:start`事件,可用于执行动画。  
   ```
-    componentDidMount(){
+    handleClick(){
       Pubsub.publish('newsapp:upload', imgUrl=>{
         
       })
@@ -114,13 +115,32 @@ import Pubsub from 'ntes-pubsub'
     }
   ```
 
-### Changelog
+### <a name="encrypt"></a>Encrypt
+  > 加密： `Encrypt`
+
+  ```
+    handleClick(){
+      // stringWillBeEncrypted 需要加密的字符串
+      Pubsub.publish('newsapp:encrypt', stringWillBeEncrypted, result=>{
+        alert(result)
+      })
+    }
+    render(){
+      return (
+        <Encrypt />
+      )
+    }
+  ```
+
+## Changelog
+* 2015/11/25 增加加密
+* 2015/11/24 增加登录、分享、上传照片的DEMO
 * 2015/10/26 项目建立
 
 
 
 
-### Todos
+## Todos
 * DEMO页
 * 增加其他接口
 * 单元测试

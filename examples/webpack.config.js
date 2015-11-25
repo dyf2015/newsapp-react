@@ -7,7 +7,6 @@ fs.readdirSync(__dirname).map(function (dir) {
     entries[dir] = path.join(__dirname, dir, 'app.js')
   }
 })
-console.log(entries)
 module.exports = {
 
   devtool: 'inline-source-map',
@@ -16,13 +15,13 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, '../__build__'),
-    filename: '[name].js'
-    // chunkFilename: '[id].chunk.js'
+    filename: '[name].js',
+    chunkFilename: '[id].chunk.js'
   },
 
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader", query: {stage: 0}}
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel"}
     ]
   },
   // resolve: {
@@ -31,7 +30,7 @@ module.exports = {
   //   }
   // },
   plugins: [
-    // new webpack.optimize.CommonsChunkPlugin('shared.js'),
+    new webpack.optimize.CommonsChunkPlugin('shared.js'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })

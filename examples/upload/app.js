@@ -4,29 +4,26 @@ import Upload from '../../src/Upload'
 import Pubsub from 'ntes-pubsub'
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.token = null
+    this.state = {
+      src: ''
+    }
     this.handleClick = this.handleClick.bind(this)
-    this.state = {}
-  }
-  componentDidMount(){
-    this.token = Pubsub.subscribe('loading:start', ()=>{
-      alert('loading start')
-    })
-  }
-  componentWillUnmount(){
-    Pubsub.unsubscribe('loading:start', this.token)
   }
   handleClick(){
-    Pubsub.publish('newsapp:upload',imgsrc=>{
-      this.setState({src: imgsrc})
+    Pubsub.publish('newsapp:upload', imgUrl=>{
+      alert(imgUrl)
+      this.setState({src: imgUrl})
     })
   }
   render(){
+    let href = location.origin + '/__build__/upload/return.html'
     return (
       <div>
         <button onClick={this.handleClick}>上传图片</button>
         <img src={this.state.src} />
-        <Upload width={750} height={10000} returnUrl="http://c.3g.163.com/uc/photo/upload?rt=f2e.developer.163.com/ybduan/newsapp-react/upload/return.html&size=750x10000x0" />
+        <Upload width={320} height={10000} returnUrl={href} />
       </div>
     )
   }

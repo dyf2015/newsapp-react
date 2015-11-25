@@ -43,7 +43,6 @@ export default class Upload extends React.Component {
     }
   }
   run(){
-    console.log('Start to choose an image.')
     if (this.isAndroid){
       this.refs.iframe.src = 'uploadimage://album/'
     }else{
@@ -59,7 +58,7 @@ export default class Upload extends React.Component {
     }else{
       return <div style={style}>
         <iframe ref="iosupload" name="iosupload" style={style}></iframe>
-        <form ref="form" action={this.props.returnUrl} target="iosupload" encType="multipart/form-data" method="POST">
+        <form ref="form" action={`http://c.3g.163.com/uc/photo/upload?rt=${this.props.returnUrl}&size=${this.props.width}x${this.props.height}x0`} target="iosupload" encType="multipart/form-data" method="POST">
           <input type="file" accept="image/*" name="abc" ref="inputFile" onChange={this.fileChanged.bind(this)}/>
         </form>
       </div>
