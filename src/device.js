@@ -1,5 +1,4 @@
 const ua = navigator.userAgent
-alert(ua)
 let device = {
   isNewsapp: !!ua.match(/newsapp/i),
   isIos: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),

@@ -89,10 +89,25 @@ example:
 ### <a name="ui"></a>UI
   > 客户端UI调整： `UI`
 
-  * 更改标题 `newsapp:title`
+  * 更改标题 `newsapp:ui:title`
     ```
-    componentDidMount(){
-      Pubsub.publish('newsapp:title', title)
+    handleClick(){
+      Pubsub.publish('newsapp:ui:title', title)
+    }
+    ```
+  * 更改工具栏 `newsapp:ui:toolbar`
+    暂时不起作用。。。
+    ```
+    handleClick(){
+      Pubsub.publish('newsapp:ui:toolbar', true)
+    }
+    ```
+  * 更改标题栏右上角按钮 `newsapp:ui:button`  
+    `text`为按钮文案，callback为点击此按钮时触发的回调事件  
+    `text`为"刷新"时，将会刷新此页面
+    ```
+    handleClick(){
+      Pubsub.publish('newsapp:ui:button', text, callback)
     }
     ```
     
@@ -133,7 +148,7 @@ example:
   ```
 
 ## Changelog
-* 2015/11/25 增加加密
+* 2015/11/25 增加加密、更改客户端UI界面的接口与DEMO
 * 2015/11/24 增加登录、分享、上传照片的DEMO
 * 2015/10/26 项目建立
 

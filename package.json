@@ -1,6 +1,6 @@
 {
   "name": "newsapp-react",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "网易新闻客户端接口",
   "main": "index.js",
   "scripts": {
