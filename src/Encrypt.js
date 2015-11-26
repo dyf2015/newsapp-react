@@ -1,6 +1,6 @@
 import React from 'react';
 import Pubsub from 'ntes-pubsub';
-import device from './device'
+import platform from './platform'
 export default class Encrypt extends React.Component {
   constructor(props) {
     super(props)
@@ -9,7 +9,7 @@ export default class Encrypt extends React.Component {
     this.token = Pubsub.subscribe('newsapp:encrypt', (encryptedText, callback)=>{
       encryptedText = encodeURIComponent(encryptedText)
       this.callback = callback
-      if(device.isIos){
+      if(platform.isIos){
         this.refs.encrypt.src = "encrypt://" + encryptedText
       }else if (window.extra && window.extra.__newsapp_encrypt){
         this.callback(window.extra.__newsapp_encrypt(encryptedText))

@@ -13,6 +13,7 @@ export default class Share extends React.Component {
       wxUrl: '微信地址',
       wxPhoto: '微信图片'
     }, this.props)
+    this.share = this.share.bind(this)
   }
   static propTypes = {
     wbText: React.PropTypes.string,
@@ -40,10 +41,11 @@ export default class Share extends React.Component {
     Pubsub.unsubscribe('newsapp:share', this.token)
   }
   share(callback){
-    this.refs.iframe.src = "share://0"
-    window.__newsapp_share_done = ()=>
+    window.__newsapp_share_done = (result)=>{
       window.__newsapp_share_done = null
       callback && callback()
+    }
+    this.refs.iframe.src = "share://0"
   }
   render(){
     let style = {
