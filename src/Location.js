@@ -1,7 +1,6 @@
 import React from 'react';
 import Pubsub from 'ntes-pubsub';
-import assign from './Object.assign'
-
+import assign from 'object-assign'
 export default class Location extends React.Component {
   constructor(props) {
     super(props);

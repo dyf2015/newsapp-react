@@ -1,6 +1,6 @@
 {
   "name": "newsapp-react",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "网易新闻客户端接口",
   "main": "index.js",
   "scripts": {
@@ -28,5 +28,8 @@
     "url": "https://github.com/dyb/newsapp-react.git"
   },
   "author": "ybduan <duanyubin2012@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "object-assign": "^4.0.1"
+  }
 }

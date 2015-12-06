@@ -5,7 +5,10 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props)
     this.run = this.run.bind(this)
-    this.userInfo = null
+    this.checkCookie = this.checkCookie.bind(this)
+    this.userInfo = {
+      name: null
+    }
   }
   componentDidMount(){
     this.token = Pubsub.subscribe('newsapp:login', (callback)=>{
@@ -15,7 +18,7 @@ export default class Login extends React.Component {
       this.run()
     })
     window.__newsapp_login_done = (userInfo)=>{
-      if(!!userInfo){
+      if(!!userInfo.name){
         this.userInfo = userInfo
         this.callback(this.userInfo)
         this.callback = ()=>{}
@@ -37,12 +40,30 @@ export default class Login extends React.Component {
     window.__newsapp_userinfo_done = null
     window.__newsapp_login_canceled = null
   }
-  run(){
-    if(!(/NewsApp/ig).test(navigator.userAgent)){
-      this.callback(false)
+  checkCookie(){
+    let sInfo = getCookie('S_INFO')
+    let pInfo = getCookie('P_INFO')
+    if(pInfo){
+      pInfo = pInfo.split('|')
+    }
+    if(sInfo){
+      sInfo = sInfo.split('|')
+      this.userInfo = {
+        name: pInfo[0]
+      }
+      this.callback && this.callback(this.userInfo)
     }else{
-      if(!!this.userInfo){
-        this.props.getUserInfo(this.userInfo)
+      this.userInfo = {name: null}
+      this.callback({name: null})
+    }
+  }
+  run(){
+    if(!!this.userInfo.name){
+      this.props.getUserInfo(this.userInfo)
+    }else{
+      if(!(/NewsApp/ig).test(navigator.userAgent)){
+        // 不在新闻客户端中，检查Cookie
+        this.checkCookie()
       }else{
         this.refs.userInfo.src = 'userinfo://'  
         this.refs.login.src = 'login://'  
@@ -60,4 +81,9 @@ export default class Login extends React.Component {
       </div>
     )
   }
+}
+
+
+function getCookie (sKey) {
+  return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 }
