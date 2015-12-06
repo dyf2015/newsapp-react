@@ -7,13 +7,18 @@ class App extends React.Component {
     super(props)
     this.handleClick = this.handleClick.bind(this)
   }
-  handleClick(){
-    Pubsub.publish('newsapp:device', info=>alert(JSON.stringify(info)))
+  handleClick(type){
+    if(type == 'id'){
+      Pubsub.publish('newsapp:device:id', info=>alert(JSON.stringify(info)))
+    }else {
+      Pubsub.publish('newsapp:device:trashid', info=>alert(JSON.stringify(info)))
+    }
   }
   render(){
     return (
       <div>
-        <button onClick={this.handleClick}>获取设备信息</button><br />
+        <button onClick={this.handleClick.bind(this, 'id')}>获取设备信息</button><br /><br />
+        <button onClick={this.handleClick.bind(this, 'transhid')}>获取TrashId</button><br />
         <Device />
       </div>
     )

@@ -4,7 +4,7 @@
 
 ## Usage
 
-大部分接口推荐以单例模式使用。  
+大部分接口推荐以单例模式使用。 **确保在整个页面中，只有一个实例。**  
 接口订阅了以`newsapp:`开头的事件，如登录订阅了`newsapp:login`。  
 example:
 
@@ -19,7 +19,7 @@ example:
   }
   ...
   ```
-
+更多示例请参考[github](https://github.com/dYb/newsapp-react/tree/master/examples)
 ## Interfaces
 
 - [登录](#login)
@@ -28,12 +28,14 @@ example:
 - [客户端UI调整](#ui)
 - [上传图片](#upload)
 - [加密](#encrypt)
+- [获取设备信息](#encrypt)
 
 
 
 ### <a name="login"></a>Login
   > 登录： `Login`
 
+  为方便开发，在非新闻客户端中，可以先访问www.163.com登录， 返回的接口为`{name: 登录邮箱名}`
   ```
   ...
     componentDidMount(){
@@ -146,8 +148,38 @@ example:
       )
     }
   ```
+### <a name="device"></a>Device
+  > 获取设备信息： `Device`
+  
+  * 获取deviceId
+  ```
+    handleClick(){
+      Pubsub.publish('newsapp:device:id', id=>{
+        
+      })
+    }
+    render(){
+      return (
+        <Device />
+      )
+    }
+  ```
+  * 获取trashId（主要用于防刷）
+  ```
+    handleClick(){
+      Pubsub.publish('newsapp:upload:trashid', id=>{
+        // 此ID为Object， 整体为trashid，一般需要转换字符串传给后台
+      })
+    }
+    render(){
+      return (
+        <Device />
+      )
+    }
+  ```
 
 ## Changelog
+* 2015/12/06 增加获取trashId接口，增加对非客户端中登录校验的支持 
 * 2015/11/25 增加加密、更改客户端UI界面的接口与DEMO
 * 2015/11/24 增加登录、分享、上传照片的DEMO
 * 2015/10/26 项目建立

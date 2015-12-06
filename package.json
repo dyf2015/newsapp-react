@@ -1,13 +1,13 @@
 {
   "name": "newsapp-react",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "网易新闻客户端接口",
   "main": "index.js",
   "scripts": {
     "compile": "babel src --out-dir lib"
   },
   "peerDependencies": {
-    "ntes-pubsub": "^1.0.2",
+    "ntes-pubsub": "^1.0.3",
     "react": "^0.14.3",
     "react-dom": "^0.14.3"
   },
