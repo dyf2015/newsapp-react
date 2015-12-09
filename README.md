@@ -29,6 +29,7 @@ example:
 - [上传图片](#upload)
 - [加密](#encrypt)
 - [获取设备信息](#encrypt)
+- [打开特定原生界面](#view)
 
 
 
@@ -161,6 +162,39 @@ example:
     render(){
       return (
         <Device />
+      )
+    }
+  ```
+  * 获取trashId（主要用于防刷）
+  ```
+    handleClick(){
+      Pubsub.publish('newsapp:upload:trashid', id=>{
+        // 此ID为Object， 整体为trashid，一般需要转换字符串传给后台
+      })
+    }
+    render(){
+      return (
+        <Device />
+      )
+    }
+  ```
+### <a name="view"></a>View
+  > 打开特定页面： `View`
+  
+  * font : 设置字体
+  * feedback : 商城反馈 
+  * personalcenter : 个人主页 
+  * mytask : 我的任务(ios:v4.3+ android:v4.4+) 
+  * inapppurchase : 内购支付页面(v4.4+，必须要用户登陆) 
+  ```
+    handleClick(){
+      let type = '' // type为以上之一
+      Pubsub.publish('newsapp:view', type)
+
+    }
+    render(){
+      return (
+        <View />
       )
     }
   ```
