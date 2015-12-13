@@ -5,6 +5,8 @@ import UI from './lib/UI'
 import Upload from './lib/Upload'
 import Encrypt from './lib/Encrypt'
 import Copy from './lib/Copy'
+import View from './lib/View'
+import Device from './lib/Device'
 const Newsapp = {
   Location,
   Login,
@@ -12,6 +14,8 @@ const Newsapp = {
   UI,
   Upload,
   Encrypt,
-  Copy
+  Copy,
+  View,
+  Device
 }
 export default Newsapp

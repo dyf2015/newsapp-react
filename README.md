@@ -4,13 +4,20 @@
 
 ## Usage
 
-大部分接口推荐以单例模式使用。 **确保在整个页面中，只有一个实例。**  
+1. 接口推荐以单例模式使用。
+2. **确保在整个页面中，只有一个实例。**
+3. 保证在React tree的最外层，确保在publish事件之前，该组件已经装载完毕。
+4. 使用发布订阅模式调用接口，具体使用方法如下。  
+
 接口订阅了以`newsapp:`开头的事件，如登录订阅了`newsapp:login`。  
 example:
 
   ```
   // YourComponent.js
   import Pubsub from 'ntes-pubsub'
+  import Login from 'newsapp-react/lib/Login'
+  // Or
+  // import {Login} from 'newsapp-react'
   ...
   componentDidMount(){
     Pubsub.publish('newsapp:login', userInfo=>{
@@ -18,6 +25,16 @@ example:
     })
   }
   ...
+  render(){
+
+    return <div>
+      <Login />
+      <div>
+        ...some other business
+      </div>
+    </div>
+
+  }
   ```
 更多示例请参考[github](https://github.com/dYb/newsapp-react/tree/master/examples)
 ## Interfaces
@@ -30,6 +47,7 @@ example:
 - [加密](#encrypt)
 - [获取设备信息](#encrypt)
 - [打开特定原生界面](#view)
+- [打开客户端](#open)
 
 
 
@@ -212,19 +230,35 @@ example:
     }
   ```
 
+### <a name="open"></a>Open
+  > 打开客户端： `Open`。  
+  > （注： 此接口仅限在客户端内使用，客户端外部使用在iOS9下无法打开客户端）
+
+  目前支持： 文章、专题、网页、订阅、图集、直播、视频
+
+
+  ```
+    handleClick(){
+      Pubsub.publish('newsapp:open', param)
+      // param 为文章ID或者专题ID或者其他。
+      // 注：图集的格式为 频道ID/图集ID，如： 0096/123123
+    }
+    render(){
+      return (
+        <Open />
+      )
+    }
+  ```
+
+
 ## Changelog
+* 2015/12/13 增加打开客户端接口
+* 2015/12/09 增加打开原生界面接口
 * 2015/12/06 增加获取trashId接口，增加对非客户端中登录校验的支持 
 * 2015/11/25 增加加密、更改客户端UI界面的接口与DEMO
 * 2015/11/24 增加登录、分享、上传照片的DEMO
 * 2015/10/26 项目建立
 
-
-
-
-## Todos
-* DEMO页
-* 增加其他接口
-* 单元测试
 
 
 
