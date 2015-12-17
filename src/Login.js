@@ -32,6 +32,8 @@ export default class Login extends React.Component {
         this.userInfo = userInfo
         this.callback(this.userInfo)
         this.callback = ()=>{}
+      }else{
+        this.refs.login.src = 'login://'  
       }
     }
   }
@@ -58,16 +60,14 @@ export default class Login extends React.Component {
     }
   }
   run(){
-    if(!!this.userInfo.name){
-      this.props.getUserInfo(this.userInfo)
+    if(!(/NewsApp/ig).test(navigator.userAgent)){
+      // 不在新闻客户端中，检查Cookie
+      this.checkCookie()
+    }else if(!!getCookie('S_INFO')){
+      // S_INFO存在，调用userinfo://协议
+      this.refs.userInfo.src = 'userinfo://'  
     }else{
-      if(!(/NewsApp/ig).test(navigator.userAgent)){
-        // 不在新闻客户端中，检查Cookie
-        this.checkCookie()
-      }else{
-        this.refs.userInfo.src = 'userinfo://'  
-        this.refs.login.src = 'login://'  
-      }
+      this.refs.login.src = 'login://'  
     }
   }
   render(){
