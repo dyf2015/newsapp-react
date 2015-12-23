@@ -1,6 +1,5 @@
 import React from 'react';
 import Pubsub from 'ntes-pubsub';
-import assign from 'object-assign'
 export default class Location extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +32,7 @@ export default class Location extends React.Component {
       this.refs.iframe.src = "location://current"
       window.__newsapp_location_done = (info)=>{
         window.__newsapp_location_done = null
-        this.location = assign({},info)
+        this.location = Object.assign({},info)
         callback(info)
       }
     }else{

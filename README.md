@@ -216,19 +216,7 @@ example:
       )
     }
   ```
-  * 获取trashId（主要用于防刷）
-  ```
-    handleClick(){
-      Pubsub.publish('newsapp:upload:trashid', id=>{
-        // 此ID为Object， 整体为trashid，一般需要转换字符串传给后台
-      })
-    }
-    render(){
-      return (
-        <Device />
-      )
-    }
-  ```
+
 
 ### <a name="open"></a>Open
   > 打开客户端： `Open`。  

@@ -1,12 +1,11 @@
 import React from 'react';
 import Pubsub from 'ntes-pubsub';
-import assign from 'object-assign'
 
 export default class Share extends React.Component {
   constructor(props) {
     super(props);
     this.token = null
-    this.state = assign({
+    this.state = Object.assign({
       wbText: '微博文案',
       wbPhoto: '微博图片',
       wxText: '微信文案',

@@ -8,7 +8,6 @@ export default class Open extends React.Component {
   componentDidMount(){
     this.token = Pubsub.subscribe('newsapp:open', (param)=>{
       let iframe = this.refs.iframe
-      alert(param)
       if(/[A-Z0-9]{16}/.test(param)){
         iframe.src = 'newsapp://docid/' + param //文章
       }else if(/^S[0-9]{13}/.test(param)){
@@ -17,8 +16,9 @@ export default class Open extends React.Component {
         iframe.src = 'newsapp://web/' + param // 网页
       }else if(/^T[0-9]{13}/.test(param)){
         iframe.src = 'newsapp://reader/' + param // 订阅
-      }else if(/^[0-9]{4}\/[0-9]{0,9}/.test(param)){
-        iframe.src = 'newsapp://photo/' + param // 图集
+      }else if(/^[A-Z0-9]{8}|[0-9]{0,9}/.test(param)){
+        let temp = param.split('|')
+        iframe.src = 'newsapp://photo/' + temp[0].slice(-4) + '/' + temp[1] // 图集
       }else if(+param){
         iframe.src = 'newsapp://live/' + param //直播
       }else if(/^V/.test(param)){
